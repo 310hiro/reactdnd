@@ -1,17 +1,20 @@
 import React from 'react'
-import { ItemTypes } from '../services/Constants'
-import { useDrag } from 'react-dnd'
+import { ItemTypes } from '../services/ItemTypes'
+import { useDrag, DragPreviewImage } from 'react-dnd'
+import { knightImage } from './KnightImage'
 
 //export default function Knight() {
 function Knight() {
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.KNIGHT },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     }),
   })
   return (
+    <>
+    <DragPreviewImage connect={preview} src={knightImage}/>
     <div
       ref={drag}
       style={{
@@ -23,6 +26,7 @@ function Knight() {
     >
       ♘
     </div>
+    </>
   )
 }
 
